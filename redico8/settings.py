@@ -28,7 +28,6 @@ logging.basicConfig(filename=log_file,level=logging.DEBUG, force=True)
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'xtqckf8zule=fd)8zyavf3#8yx@a-*n=zkn31$uf!29^@ro6ku'
 SECRET_KEY = get_random_secret_key()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
