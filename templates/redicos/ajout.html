@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block actions %}{% endblock %}
+{% block messages %}{% endblock %}
+{% block comment-jouer %}{% endblock %}
+{% block colonne-gauche %}{% endblock %}
+{% block index-detail %}{% endblock %}s
+
+{% block account %}{% endblock %}
+
+{# REDICO AJOUT #}
+
+{% block formes %}
+    <div class="div-formes">
+        <div class="div-header">
+            {{ user }} entrez le titre de votre Redico
+        </div>
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form.as_table }}
+x
+            <div class="div-wrapper">
+                <button type="submit" class="form-button btn">Ajout</button>
+                <a href="{% url 'redicos-index' %}"> <button class="btn" type="button" >Annuler</button></a>
+            </div>
+        </form>
+    </div> {# div-formes #}
+{% endblock formes %}

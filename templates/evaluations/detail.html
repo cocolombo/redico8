@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{#table.wide-table { width:400px; }#}
+
+{% block index-detail %}
+    <div class="div-index-detail">
+        <h2> Info sur l'évaluation </h2>
+        <table class="evaluation-detail">
+            <tr> <td> Joueur      </td> <td> {{ e.joueur }} </td> </tr>
+            <tr> <td> Proposition </td> <td> {{ e.proposition }} </td> </tr>
+            <tr> <td> Commentaire </td> <td> {{ e.commentaire }} </td></tr>
+            <tr> <td> Date        </td> <td> {{ e.date_eval }} </td></tr>
+            <tr> <td> Évaluation  </td> <td> {{ e.eval }} </td></tr>
+        </table>
+    </div>
+{% endblock %}

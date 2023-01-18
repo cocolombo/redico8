@@ -1,0 +1,41 @@
+
+{% extends "base.html" %}
+{% load evaluations_tags %}
+{% block messages %}{% endblock %}
+{% block action %}{% endblock %}
+{% block comment-jouer %}{% endblock %}
+{% block colonne-gauche %}{% endblock %}
+{% block footer %}{% endblock %}
+{# comment #}
+prop
+red
+joueur
+evals
+{# endcomment #}
+
+{#{% block title %}Évaluation d'une proposition{% endblock %}#}
+{% block formes %}
+
+    <div class="div-formes">
+	<h3>Redico: {{ red.titre }}</h3>
+
+	{% if prop.preambule %}
+		<br />
+		Préambule: {{ prop.preambule}}
+		<br />
+	{% endif %}
+	Proposition: {{ prop.texte }} [{{ prop.auteur }}]
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p}}
+
+        <div class="div-wrapper">
+        <button type="submit" class="form-button btn">Ajout</button>
+        <a href="{% url 'redicos-index' %}"> <button class="btn" type="button" >Annuler</button></a>
+        </div>
+    </form>
+    </div>
+
+
+{% endblock formes  %}

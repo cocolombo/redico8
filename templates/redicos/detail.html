@@ -1,0 +1,172 @@
+{% extends "base.html"  %}
+{% load evaluations_tags %}
+{% load gb_filters %}
+{% load i18n %}
+
+{% block messages %}{% endblock %}
+{% block comment-jouer %}{% endblock %}
+{% block formes %}{% endblock %}
+{% block account %}{% endblock %}
+
+{% block index-detail %}
+<div class="div-index-detail">
+{#   <div>                                            {# TABLE #}
+    <table class="redico-detail">
+{#        <div>                                       {# TABLE HEAD #}
+            <thead>
+                <caption>
+
+
+                    <h2>Redico: {{ red.titre }} [{{ red.createur }}]</h2>
+                    <div class="liste-joueurs">
+                        {# Liste des participants #}
+                        {% for info in  red.participants_noms_ids %}
+                             <a href="{% url 'joueur-detail' info.id_ %}">{{ info.nom_ }}</a>
+                        {% endfor %}
+                    </div>
+                    {# AJOUT PROPOSITION #}
+                    <br />
+                      <div class="div-wrapper">
+                        {% if user.is_authenticated %}
+                            {% peut_ajouter_proposition_vide %}
+                        {% endif %}
+                    </div>
+
+                <br />
+                    {# LARGEUR DES COLONNES #}
+                    <th class="Actions">Actions</th>
+                    <th class="Proposition">Propositions</th>
+                    <th class="Evaluation">Évaluations</th>
+                    <th class="No">#</th>
+                </caption>
+            </thead>
+{#        </div>                                      {# /TABLE HEAD #}
+
+{#        <div>#}
+            {% if red.nb_props == 0 %}                  {# ICONE AU CAS OÙ IL N'Y A AUCUNE PROPOSITION #}
+              <tr>
+              <td>{% peut_ajouter_proposition_vide %}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              </tr>
+            {% endif %}
+{#        </div>                                      {# /ICONE AU CA AS OÙ IL N'Y A AUCUNE PROPOSITION #}
+
+{#        <div>                                           {# POUR CHACUNE DES PROPOSITIONs #}
+            {% for prop in props %}
+                <tr>                    {# ACTIONS-NO-ÉVALUATIONS-PROPOSITIONS #}
+
+                    <div>                   {# COLONNE ACTIONS #}
+                        <td>
+{#                        {% peut_ajouter_proposition_vide %}#}
+                        {% peut_editer_proposition  %}
+                        {% peut_supprimer_proposition %}
+                        {% peut_evaluer_proposition %}
+                        {% peut_editer_eval %}
+                        {% detail_de_la_proposition %}
+{#                        {% peut_voir_son_profil %}#}
+                        </td>
+                    </div>                  {# /COLONNE ACTIONS #}
+                    <div>                       {# COLONNE PROPOSITION #}
+                    <td>
+                        <table class="colprop"> {# Préambule-Texte-Lien-Auteur #}
+                        {# PRÉAMBULE #}
+                            {% if prop.preambule %}
+                                <tr>
+                                    <th>Préambule</th>
+                                    <td style="word-break: break-word"> {{ prop.preambule|safe|urlize|truncatewords:50  }}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {# /PRÉAMBULE #}
+
+
+                            <tr>   {# TEXTE #}
+                                <th>Texte</th>
+                                <td  style="word-break: break-word" ><a href="{% url "proposition-detail" red.id prop.sequence %}">{{ prop.texte }}</a></td>
+                            </tr>   {# /TEXTE #}
+
+
+                            {% if prop.lien %} {# LIEN #}
+                                <tr>
+                                    <th>Lien</th>
+                                    <td  style="word-break: break-word">{{ prop.lien|safe|urlizetrunc:40 }}</td>
+                                </tr>
+                            {% endif %}        {# /LIEN #}
+
+
+                            <tr>  {# AUTEUR #}
+                                <th>Auteur</th><td> {{ prop.auteur }}</td>
+                            </tr> {# /AUTEUR #}
+
+                    </table> {# /Préambule-Texte-Lien-Auteur #}
+                    </td>
+                    </div>                  {# /COLONNE PROPOSITION #}
+                    <div>                  {# COLONNE ÉVALUATIOMS #}
+                    <td>
+                <!-- Table avec username + Evaluations -->
+
+
+                <div>           {# COLONNE EVALUATION #}
+                <table class="colonneEvaluation">
+                <p></p>
+                    {% for e in prop.evals.evals %}
+                        <tr>
+                            <td>
+                                {{ e.nom|slice:":6" }} ({{ e.nbEdits }})
+                                {% if e.evaluation >= 0 %}
+{#                                <div class="progress-bar" role="progressbar" style="width: {{e.evaluation}}px">{{ e.evaluation}}%</div>#}
+                                <progress class="progress" value={{ e.evaluation|abstention }} max="100"></progress>
+                                {% endif %}
+                            </td>
+                            {% if e.le_commentaire %}  <!-- commentaire  -->
+                                <td>
+                                    <a title="{{ e.le_commentaire }}"
+                                    href="{% url "proposition-detail" red.id prop.sequence %}">
+                                    <b><i>{{ e.evaluation|floatformat:"-5"|abstention }} *</i></b></a>
+                                </td>
+                            {% else %}  <!-- sans commentaire  -->
+                                <td>{{ e.evaluation|floatformat:"-5"|abstention }}</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    {% if prop.nb_evaluations > 1 %}
+                        <td>Moyenne
+                         <progress class="progress" value={{ prop.moyenne_des_evals|abstention }} max="100"></progress>
+                        </td>
+                        <td>
+                            {{ prop.moyenne_des_evals|floatformat:1 }}
+                        </td>
+
+                    {% endif %}
+                </table>
+                </div>
+
+                </td>
+                </div>                  {# /COLONNE ÉVALUATION #}
+
+                    <div>                   {# COLONNE No #}
+                        <td>
+                            <a href="{% url 'proposition-detail' red.id prop.sequence %}">{{ prop.sequence }}</a>
+                        </td>
+                    </div>                  {# /COLONNE No #}
+                </tr>                   {# /ACTIONS-NO-ÉVALUATIONS-PROPOSITIONS #}
+            {% endfor %}
+{#        </div>                                          {# /POUR CHACUNE DES PROPOSITIONs #}
+    </table>
+{#    </div>                                       {# /TABLE #}
+</div>
+
+{% endblock index-detail %}
+
+
+
+
+
+
+
+
+
+

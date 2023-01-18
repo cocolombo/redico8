@@ -1,0 +1,17 @@
+{% block redicos-actifs %}
+    <div class="redicos-actifs">
+        <div class="div-redicos-actifs">
+            <table width="80%">
+                <caption>Redicos les plus actifs<p></p></caption>
+                <tbody>
+                    {% for r in redicos_dynamiques %}
+                        <tr>
+                            <td><a href="/redico/{{ r.redico__id }}/"> {{ r.redico__titre|truncatechars:15 }}</a></td>
+                            <td><a href="/redico/{{ r.redico__id }}/"> {{ r.cnt }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+    </div>
+{% endblock redicos-actifs %}

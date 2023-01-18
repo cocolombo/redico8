@@ -1,0 +1,12 @@
+{#LES JOUEURS#}
+{#{% block les-joueurs %}#}
+{#    <table class="navigation">#}
+{#        <tr>#}
+{#        ++{{ red.joueurs_info }}++#}
+{#        <td>Les joueurs: </td>#}
+            {% for info in  red.les_joueurs_noms_ids %}
+                 <td><a href="/joueurs/{{ info.1 }}/"> {{ info.0 }}  </a></td>
+            {% endfor %}
+{#        </tr>#}
+{#    </table>#}
+{#{%  endblock %}#}

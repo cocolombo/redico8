@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block editer %}
+    <form action='.' method='POST'>{% csrf_token %}
+        <h1>Vous êtes l'auteur de ce Redico intitulé:  "{{ object.titre }} <p>'"
+            et personne n'a encore fait de proposition. Voulez-vous le supprimer?</h1>
+        <p><input type='submit' value='Oui' />  <a href='../'>Cancel</a></p>
+    </form>
+{% endblock %}

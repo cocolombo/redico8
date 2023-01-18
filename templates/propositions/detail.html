@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load evaluations_tags %}
+{% load gb_filters %}
+
+
+{% block messages %}{% endblock %}
+{% block action %}{% endblock %}
+{% block comment-jouer %}{% endblock %}
+{% block formes %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block index-detail %}
+    <div class="div-index-detail">
+    	<table class="proposition-detail">
+            <thead>
+            <caption>
+               <h2>Détail de la proposition</h2>
+            </caption>
+            </thead>
+
+        <tr> <td>  Redico     </td> <td> {{ red.titre }}</td> </tr>
+        {% if prop.preambule %}
+		    <tr> <td>  Preambule  </td> <td> {{ prop.preambule|safe|urlize|urlize }}</td> </tr>
+		{% endif %}
+            <tr> <td>  Proposition</td> <td> {{ prop.texte|safe|urlize|urlize }}</td> </tr>
+        {% if prop.lien %}
+            <tr> <td>  Lien       </td> <td> {{ prop.lien|urlize|urlize }} </td> </tr>
+		{% endif %}
+            <tr> <td>  Auteur     </td> <td> {{ prop.auteur }}      </td> </tr>
+		<tr> <td>  Date       </td> <td> {{ prop.date_de_pub|date:"Y-m-d " }} </td> </tr>
+
+{#		<tr> <td>  Redico     </td> <td> {{ prop.redico.titre }}      </td> </tr>#}
+		<tr> <td>  Nombre d'évaluations</td> <td>    {{ prop.nb_evaluations }}</td></tr>
+		<tr> <td>  Moyenne des évaluations</td> <td> {{ avg|floatformat:1 }}</td></tr>
+	</table>
+    <br />
+
+	{% if prop.nb_evaluations == 0 %}
+		Personne encore n'a évalué cette proposition.
+	{% else %}
+   	<table class="proposition-detail">
+        <caption>
+            Évaluations actuelles de cette proposition
+        </caption>
+        <thead>
+            <th>Joueur</th>
+            <th>Évaluation</th>
+            <th>Nb modifs</th>
+            <th>Commentaire</th>
+            <th>Date</th>
+        </thead>
+
+        {% for e in prop.evals.evals %}
+			<tr>
+                {# Joueur #}
+                <td><a href="/joueur/{{ e.joueurId }}/">{{ e.nom }}</a></td>
+                {# Évaluation #}
+{#		  	    <td><a href="/redico/{{prop.redico.id}}/proposition/{{prop.id}}/evaluation/edit">{{ eval.joueur }}</a></td>#}
+                <td>{{ e.evaluation|floatformat:"-5"|abstention  }} </td>
+                <td>
+                    {% if e.nbEdits > 0 %}
+                        Modifié {{ e.nbEdits }} fois
+                    {% endif %}
+                 </td>
+                <td>{{ e.le_commentaire|safe|urlize }} </td>
+                <td>{{ e.laDate|date:"Y-m-d " }}</td>
+		  	</tr>
+		{% endfor %}
+                 <tr><td>Moyenne</td><td>{{ avg|floatformat:1 }}</td></tr>
+
+	{% endif %}
+	</table>
+    </div>
+{% endblock index-detail %}

@@ -1,0 +1,32 @@
+{# proposition/edit.html#}
+{% extends "base.html" %}
+{% load evaluations_tags %}
+
+{% block colonne-gauche %}{% endblock %}
+{{% block comment-jouer %}{% endblock %}
+{% block messages %}{% endblock %}
+
+
+{% block formes %}
+    <div class="formes">
+{#    {% include 'extra.html' with obj=extra %}#}
+{#++{{ extra }}//#}
+{#prop:    {{ prop }} :prop#}
+{#proposition-edit.html <br />#}
+{#Ajout d'une proposition au redico : {{ redico.titre }}#}
+{#Le champ texte est obligatoire les autres sont facultatifs.#}
+<form id="form_ajout_edit_prop" method="POST" action=".">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table}}
+     </table>
+
+
+    <div class="div-wrapper">
+        <button type="submit" class="form-button btn" formnovalidate >Confirmer</button>
+        <a href="{% url 'redicos-index' %}"> <button class="btn" type="button" >Annuler</button></a>
+    </div>
+</form>
+    </div>
+{% endblock formes %}
+propositions-edit

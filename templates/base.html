@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'redico4.css' %}"/>
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">#}
+    <title>{Le Redico</title>
+{#    <script src="jquery.js"></script>#}
+</head>
+<body>
+{#<div>#}
+    <div class="grille-de-fond">
+{#        <section>#}
+        {% block header %}
+            {%  if user.is_authenticated %}
+            <div class="div-header"><h1>Le Redico <h6>({{ user }} est connecté}</h6></h1></div>
+            {% else %}
+            <div class="div-header"><h1>Le Redico <h6>(Vous n'êtes pas connecté}</h6></h1></div>
+            {% endif %}
+        {% endblock %}
+
+        {% block navigation %}
+            {% include 'navigation.html' %}
+        {% endblock %}
+
+
+        {% block messages %}
+            <div class="div-messages">
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            </div>
+        {% endblock %}
+{#        </section>#}
+
+            <div class="div-colonne-gauche">
+                {% block colonne-gauche %}
+{#                    {% block stats %}                   {% include 'stats.html' %}                  {% endblock %}#}
+                    {% block dern-props %}              {% include 'dernieres-propositions.html' %} {% endblock %}
+                    {% block dern-evals %}              {% include 'dernieres-evaluations.html' %}  {% endblock %}
+                    {% block redicos-actifs %}          {% include 'redicos-actifs.html' %}         {% endblock %}
+                    {% block joueurs-actifs %}          {% include 'joueurs-actifs.html' %}         {% endblock %}
+                    {% block les-lois %}                {% include 'les-lois.html' %}               {% endblock %}
+                    {% block les-codes %}               {% include 'les-codes.html' %}              {% endblock %}
+                    {% block footer %}                  {% include 'footer.html'    %}              {% endblock %}
+                {% endblock %}
+            </div>
+
+         {% block index-detail %}
+{#            <div class="div-index-detail">#}
+{#                {% block redicos-index %}{% endblock %}#}
+{#                {% block redico-detail %}{% endblock %}#}
+{#                {% block joueurs-index %}{% endblock %}#}
+{#                {% block joueur-detail %}{% endblock %}#}
+{#                {% block propositions-index %}{% endblock %}#}
+{#                {% block proposition-detail %}{% endblock %}#}
+{#            </div>#}
+        {% endblock %}
+
+
+{#            <div class="div-formes">#}
+                {% block formes %}
+{#                    {% block redico-ajout %}{% endblock %}#}
+{#                    {% block redico-edit  %}{% endblock %}#}
+{#                    {% block redico-supprime  %}{% endblock %}#}
+{#                    {% block proposition-ajout %}{% endblock %}#}
+{#                    {% block proposition-edit  %}{% endblock %}#}
+{#                    {% block proposition-supprime  %}{% endblock %}#}{#                    {% block login %}{% endblock %}#}
+{#                    {% block register %}{% endblock %}#}
+{#                    {% block changer-mdp %}{% endblock %}#}
+                {% endblock formes %}
+{#            </div>#}
+
+                <div class="div-comment-jouer">
+                    {% block comment-jouer %}
+                    {% endblock comment-jouer %}
+                </div>
+
+</div>  {# grille de fond #}
+
+
+ <script>
+    // suppose the `id` attribute of element is `message_container`.
+    // getElementsByClassName() retourne une liste mais comme il n<y a qu'un element de cette classe
+    // faut quand même faire: ("div-messages")[0]. Sinon on utilise getElementById()
+    var message_ele = document.getElementsByClassName("div-messages")[0];
+    setTimeout(function(){
+       message_ele.style.display = "none";
+    }, 10000);
+ </script>
+
+{# Sxript pour la page comment_jouer #}
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+</script>
+</body>
+</html>
+
+

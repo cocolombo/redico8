@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block comment-jouer %}{% endblock %}
+{% block colonne-gauche %}{% endblock %}
+{#{% block messages %}{% endblock %}#}
+
+{#{% block formes %}{% endblock %}#}
+
+{% block formes %}
+    <div class="div-formes">
+        <div class="div-header">
+            signup.html
+            Suite à votre inscription. nous vous enverrons,
+            à votre adresse de courriel, un message avec un lien sur lequel vous devrez cliquer pour finaliser votre inscription
+            <br /> <br />(Entrez le même mot de passe deux fois pour validation)
+
+        </div>
+
+        <form method="post" action=".">
+            {% csrf_token %}
+            <table class="no-border">
+                {% for error in form.username.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </table>
+            {{ form.as_table}}
+            <div class="div-wrapper">
+                <button type="submit" class="form-button btn">Confirmer</button>
+                <a href="{% url 'redicos-index' %}"> <button class="btn" type="button" >Annuler</button></a>
+            </div>
+        </form>
+    </div>
+{% endblock formes %}
+
+
+        {#          {% for field in form %}#}
+        {#            {{ field.label_tag }}<br>#}
+        {#            {{ field }}#}
+        {#            {% if field.help_text %}#}
+        {#              <small style="display: none">{{ field.help_text }}</small>#}
+        {#            {% endif %}#}
+        {#            {% for error in field.errors %}#}
+        {#              <p style="color: red">{{ error }}</p>#}
+        {#            {% endfor %}#}
+        {#          </p>#}
+        {#          {% endfor %}#}

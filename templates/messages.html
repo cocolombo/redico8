@@ -1,0 +1,14 @@
+{#{% extends 'base.html' %}#}
+{% block messages %}
+
+{#{{ messages.success }}#}
+    {% if messages %}
+    <ul class="messages text-small">
+        {% for message in messages %}
+            {{ message }}
+{#            <script>M.toast({html: "{{ message }}", classes: 'blue rounded', displayLength:2000});</script>#}
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}
+

@@ -1,0 +1,10 @@
+
+{#=={{ navbar_items }}==#}
+{% block dyn_navbar %}
+    {% for title, slug in navbar_items.items %}
+    {#    {{ title }}-{{ slug }}#}
+        <tr>
+        <a href="{{ slug }}">{{ title }}</a>
+        </tr>
+    {% endfor %}
+{% endblock %}

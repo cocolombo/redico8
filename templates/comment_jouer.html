@@ -1,0 +1,160 @@
+{% extends "base.html"  %}
+
+{% block colonne-gauche %}{% endblock %}
+{#{% block action-redico %}{% endblock %}#}
+{#{% block action-proposition %}{% endblock %}#}
+{% block messages %}{% endblock %}
+{% block index-detail %}{% endblock %}
+{% block formes %}{% endblock %}
+{% block account %}{% endblock %}
+
+
+{% block comment-jouer %}
+
+
+    <button type="button" class="collapsible">Renseignements généraux</button>
+    <div class="hidden">
+      <p>
+        <table>
+        <tr><td>Pour participer activement vous devez <a href="/register/">vous inscrire sur le site</a>
+        aux redicos (faire des propositions et évaluations).  </td></tr>
+        <tr><td>Consulter la <a href="/redicos/">liste des redicos</a> et  cliquez sur  celui qui vous intéresse</td></tr>
+        <tr><td>Avant de pouvoir évaluer il faut tout d'abord faire vous même une proposition (c'est la façon de participer).
+                Cette première proposition peut être un simple: "Bonjour, je me joins à ce redico".</td></tr>
+        <tr><td>Si vous entrez dans un redico déjà avancé, vous devez évaluer toutes les propositions
+            déjà au dossier. Si le redico est très avancé, vous devez évaluer au moins les 25
+            dernières propositions.</td></tr>
+        <tr><td>Pour ajouter vos propres propositions cliquez sur le bouton "Ajouter une proposition".</td></tr>
+        <tr><td>Les astérisques à coté des évaluations indiquent que cette évaluation est commentée.0
+                  Cliquez sur cet astérisque pouraccéder au détail de l'évaluation.</td></tr>
+        <tr><td>En cliquant sur le bouton détail (dans la marge de droite),
+                 on obtient tous les commentaires de tous les joueurs</td></tr>
+        <tr><td>Si vous êtes nouveau, nous vous conseillons de vous familiariser avec le redico en regardant
+            attentivement quelques parties déjà en cours ou terminée.</td></tr>
+        <tr><td>Bon redico. <a href="mailto:cocolombo@pm.me">Nous rejoindre.</a></td></tr>
+        </table>
+      </p>
+    </div>
+
+    <button type="button" class="collapsible">Qu’est-ce que le Redico ?</button>
+    <div class="hidden">
+    <p>
+    <table>
+        <tr><td>C'est un acronyme signifiant <strong>REcherche des DIscontinuités entre
+        les COnclusions</strong> (ou <strong>COnvictions</strong>).
+        <br /><br />
+        C’est à la fois un jeu et un mode de discussion.
+        L’idée est de d'éviter la rhétorique et les faux-fuyants. <br /><br />
+        En Redico se joue à deux joueurs ou plus. On tente de mesurer les
+        désaccords d’opinion en s’échangeant des <strong>propositions</strong> à évaluer.
+        On évite les questions, en faisant plutôt des <strong>affirmations</strong>.
+        On évalue nos propositions et celles des autre joueurs avec une note entre 0% et 100%.
+        Si l'affirmation de la proposition est une question
+        de <strong>fait</strong> (i.e. c’est <i>vrai</i> ou c’est <i>faux</i>),
+        on donne une probabilité subjective mesurant notre accord que la proposition soit vraie.  <br /><br />
+        Exemple : <strong>Le plus récent ancêtre commun entre Denis et sa chatte
+        vivait durant le Crétacé.</strong><br />
+        L'évaluation de Denis est de 97% <br /><br />
+
+        Si la proposition à évaluer est plus floue et aborde une question de goût ou d’opinion,
+        on indique notre <i>“degré global d’accord”</i>. Voir la
+        <span class="gen"><a class="postlink" href="#f1r14">Loi 14</a></span>.  <br /><br />
+        Exemple : <strong>Les frites sont meilleures avec du vinaigre.</strong><br />
+        L'évaluation de Denis est de: 0.1% <br /><br />
+
+        Quand deux personnes sont en désaccord au sujet d’une certaine proposition,
+        <strong>c’est rarement pour les mêmes raisons</strong>.  Il convient alors
+        de savoir si elles sont d’accord sur ces diverses raisons antécédentes
+        (sont-ce des faits?), puis sur les raisons de ces raisons, etc.
+        <br /><br />
+        Les deux personnes ne sont certainement pas en désaccord sur <strong>tout</strong>.
+        <br /><br />
+        Dans l’espace abstrait des “propositions intéressantes”, il y a donc, grosso modo,
+        le <strong>pays de l’accord</strong> et le <strong>pays du désaccord</strong>.
+        Après avoir planté quelques piquets~propositions dans le pays de l’accord et quelques
+        autres dans le pays du désaccord, chacun essaie (avec ses propositions suivantes)
+        de trouver le mi-chemin du désaccord. Chacun essaie de cartographier les contours
+        où leurs opinions divergent.
+        D’où le nom du jeu : REcherche des DIscontinuités entre les COnclusions.<br /><br /></td></tr>
+    </table>
+    </p>
+    </div>
+
+    <button type="button" class="collapsible">Les lois du redico, En Redico...</button>
+    <div class="hidden">
+    <p>
+    <table>
+        <tr><td id="f1r1"><strong>Loi 1:   </strong>...on n’argumente pas.</td></tr>
+        <tr><td id="f1r2"><strong>Loi 2:   </strong>...on alterne à émettre des propositions.</td></tr>
+        <tr><td id="f1r3"><strong>Loi 3:   </strong>...le proposeur évalue le premier ses propres propositions.</td></tr>
+        <tr><td id="f1r4"><strong>Loi 4:   </strong>...favoriser les propositions concises.</td></tr>
+        <tr><td id="f1r5"><strong>Loi 5:   </strong>...se limiter en moyenne à 4-5 propositions par salve. </td></tr>
+        <tr><td id="f1r6"><strong>Loi 6:   </strong>...les propositions, qui ont été évaluées ne peuvent plus être éditées.</td></tr>
+        <tr><td id="f1r7"><strong>Loi 7:   </strong>...si on met un lien vers une page web/vidéo, on indiquer où se trouve le bout pertinent à la discussion. </td></tr>
+        <tr><td id="f1r8"><strong>Loi 8:   </strong>...si on suspend l’évaluation d’une proposition, on en émet une autre portant sur la raison qui nous a empêché d’évaluer la première.</td></tr>
+        <tr><td id="f1r9"><strong>Loi 9:   </strong>...pas plus d’un URL par proposition.</td></tr>
+        <tr><td id="f1r10"><strong>Loi 10: </strong>...éiter les propositions doubles. Faire plutôt deux propositions distinctes</td></tr>
+        <tr><td id="f1r11"><strong>Loi 11: </strong>...quand un joueur abandonne la partie, il le fait savoir aux autres. </td></tr>
+        <tr><td id="f1r12"><strong>Loi 12: </strong>...faire des propositions claires et autosuffisantes. Si, on fait référence à des propositions déjà au dossier, on en indique les numéros.</td></tr>
+        <tr><td id="f1r13"><strong>Loi 13: </strong>...un joueur qui se joint à une partie en cours doit évaluer les propositions déjà au dossier. (Si le dossier est énorme. Dans ce cas, le nouveau joueur évalue au moins les 25 dernières propositions.)</td></tr>
+        <tr><td id="f1r14"><strong>Loi 14: </strong>...on évalue au mieux la probabilité (subjective) d'une proposition qui est une “question de fait”. Pour les propositions floues  ou question "de goût/opinion”, on indique un “degré global d’accord”.</td></tr>
+        <tr><td id="f1r15"><strong>Loi 15: </strong>...tout joueur peut modifier ses évaluations passées.</td></tr>
+        <tr><td id="f1r16"><strong>Loi 16: </strong>...il n’y a pas d'opinions tabous.</td></tr>
+        <tr><td id="f1r17"><strong>Loi 17: </strong>...éviter les formulations en “X est possible/impossible”. Mieux vaut évaluer directement X en mettant 0% pour impossible et >0% pour possible.</td></tr>
+        <tr><td id="f1r18"><strong>Loi 18: </strong>...on peut commenter d'une facon concise son évaluation d'une proposition. </td></tr>
+        <tr><td id="f1r19"><strong>Loi 19: </strong>...la partie se termine quand tous les joueurs, à tour de rôle, passent leur tous. Un joueur peut aussi proposer (en proposition régulière) de mettre un terme à la partie.</td></tr>
+
+    </table>
+    </p>
+    </div>
+
+    <button type="button" class="collapsible">Les caractéristiques du Redico</button>
+    <div class="hidden">
+    <p>
+    <table>
+        <tr><td><strong>Caractéristique 0:  </strong>Le Redico est une idée originale de <strong>Denis Labelle</strong> et qui a connu sa première exposition sur le site des Sceptiques du Québec .</td></tr>
+        <tr><td><strong>Caractéristique 1:  </strong>Le Redico permet beaucoup mieux que le style libre d’obtenir des réponses claires de l’autre.</td></tr>
+        <tr><td><strong>Caractéristique 2:  </strong>Dans une discussion en style libre, on reçoit rarement des réponses. Le plus souvent, ce sont plutôt des répliques.</td></tr>
+        <tr><td><strong>Caractéristique 3:  </strong>En Redico, plus de détestables “Ça fait 10 fois que je vous demande si...”, ni de “Ça fait 10 fois que je vous dis que...”</td></tr>
+        <tr><td><strong>Caractéristique 4:  </strong>Le Redico permet moins que le style libre de cacher sa mauvaise foi derrière des effets de style.</td></tr>
+        <tr><td><strong>Caractéristique 5:  </strong>Une discussion en style libre où l’un des deux est de mauvaise foi peut aisément durer des mois et des mois et des mois, sans réel progrès. On tourne en rond. Par contre, un Redico où l’un des joueurs est de mauvaise foi dépasse rarement 10 salves.</td></tr>
+        <tr><td><strong>Caractéristique 6:  </strong>En style libre, un protagoniste coincé se met presque toujours à insulter. En Redico, un protagoniste coincé abandonne habituellement la partie. Plus de détestables “Espèce de ¶§#@¾&”.</td></tr>
+        <tr><td><strong>Caractéristique 7:  </strong>En Redico, chacun est pratiquement obligé de tenir compte de ce que dit l’autre. En style libre, on choisit, on évite, on zigonne.</td></tr>
+        <tr><td><strong>Caractéristique 8:  </strong>Dans un Redico, toutes les propositions (numérotées) restent actives au dossier. Il est beaucoup plus facile qu’en style libre de faire des références croisées et de mettre le doigt sur d’éventuelles contradictions.</td></tr>
+        <tr><td><strong>Caractéristique 9:  </strong>Le Redico vise expressément à ÉVITER les démonstrations et les raisonnements argumentés. Il met le focus directement sur les conclusions.</td></tr>
+        <tr><td><strong>Caractéristique 10: </strong>En Redico, les démonstrations et les raisonnements sont "entre" les propositions, et sont laissés à la discrétion (et à l’intelligence) de chacun.</td></tr>
+        <tr><td><strong>Caractéristique 11: </strong>En Redico, la transmission d’information pertinente peut se faire adéquatement via la Loi 7 ou, si nécessaire, un bref commentaire explicatif “hors salve”.</td></tr>
+        <tr><td><strong>Caractéristique 12: </strong>En Redico, plus de “dumpings massifs”. Chacun doit défendre sa cause lui-même (avec ses moyens du bord) sans se faire paresseusement remplacer par un champion extérieur aussi volubile qu’ininterrompable. (Voir Loi 7)</td></tr>
+        <tr><td><strong>Caractéristique 13: </strong>Pour qu’une démonstration soit convaincante, elle doit s’appuyer sur des points d’accord. En Redico, on sait beaucoup mieux qu’en style libre quels sont les points d’accord et les points de désaccord.</td></tr>
+        <tr><td><strong>Caractéristique 14: </strong>Plus le “contraste de torsion” entre les participants est grand, plus le Redico est supérieur au style libre pour arriver rapidement au coeur du différend.</td></tr>
+        <tr><td><strong>Caractéristique 15: </strong>En Redico, nul ne peut forcer son ordre du jour, ni son itinéraire. Tous les joueurs ont également les mains sur le volant et peuvent, à leur tour, salver où bon leur semble.</td></tr>
+        <tr><td><strong>Caractéristique 16: </strong>Autant en Redico qu’en style libre, on ne peut convaincre quelqu’un qui se fout d’être cohérent.</td></tr>
+        <tr><td><strong>Caractéristique 17: </strong>Autant en Redico qu’en style libre, on ne peut convaincre quelqu’un qui est moins tordu qu’on l’est soi-même.</td></tr>
+        <tr><td><strong>Caractéristique 18: </strong>Le Redico est un jeu de “qui perd gagne”. Le véritable gagnant est celui qui s’est le plus détordu.</td></tr>
+        </table>
+        </p>
+    </div>
+
+
+    <button type="button" class="collapsible">Politique de confidentialité</button>
+    <div class="hidden">
+    <p>
+    <table>
+        <tr><td>À venir .... </td></tr>
+   </table>
+        </p>
+    </div>
+
+    <button type="button" class="collapsible">Conditions d'utilisation</button>
+    <div class="hidden">
+    <p>
+    <table>
+        <tr><td>À venir....</td></tr>
+   </table>
+        </p>
+    </div>
+{% endblock comment-jouer %}
+
+
+
+

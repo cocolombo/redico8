@@ -1,0 +1,10 @@
+{% autoescape off %}
+Bonjour vous vos êtes inscrit sur le site du Redico,
+
+Pour activer votre compte, veuillez cliquez sur le lien suivant.
+Ensuite vous pourrez pariciper aux Redicos.
+
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}
+
+

@@ -1,0 +1,66 @@
+{#{% extends 'base.html' %} #}
+{% load evaluations_tags %}
+
+{#{% block actions-redicos %}{% endblock %}#}
+
+{#{% block action-proposition %}#}
+{#    {% include 'action_proposition.html' %}#}
+{#{% endblock %}#}
+
+{% block index-detail %}
+    <div class="div-index-detail">
+        {% if props %}
+        <h2> Propositions du redico: {{ red.titre }}</h2>
+
+        <table class="proposition-index">
+            <tr>
+                <th>No1.</th><th>Proposition</th><th>Évaluationsr</th>
+            </tr>
+
+            {% for p in props %}
+            <tr>qqq
+                  <td>{{ p.sequence }}ww</td>
+                  <td>
+                  {% if p.preambule %}
+                       Préambule: {{ p.preambule|urlize }}<hr>
+                  {% endif %}
+                  <a href="/redico/{{ red.id }}/proposition/{{ p.sequence }}/"></a>
+                            {{ p.texte|urlize }} [{{ p.auteur }}] <p>
+                  {% if p.lien %}
+                        <hr>
+                        Lien: {{ p.lien|urlize }}</td>
+                  {% endif %}
+
+    {#{% comment %}				  {% if p.auteur == request.user %}#}
+    {#					  <p><a href="/redico/{{ red.id }}/proposition/{{ p.sequence }}/edit/"><h6>Éditer cette proposition</h6></a>#}
+    {#				  {% endif %}#}
+    {#{% endcomment %}#}
+
+
+                {% autoescape off %}
+    {#                {% comment %}{{ red.id }} <br />#}
+    {#                {{ prop.sequence }} <br />#}
+    {#                {{ request.user.id }} <br />#}
+    {#                {% endcomment %}#}
+                ={% evalueYN red.id p.sequence request.user.id %}
+                =={% editerYN red.id p.sequence request.user.id %}
+                {% endautoescape %}
+                  </td>
+                <td><h6>
+                        {% for e in p.evaluation_set.all %}
+                            {{ e }} <p>
+                        {% endfor %}
+                        <a href="/redico/{{ red.id }}/proposition/{{ p.sequence }}/evaluation/ajout/">Évaluer</a>
+                </h6></td>
+
+
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p>Aucune proposition à lister.</p>
+        {% endif %}
+    </div>
+{#	<a href="/redico/{{ red.id }}/proposition/ajout"> Ajouter une proposition </a>	#}
+{% endblock index-detail %}
+

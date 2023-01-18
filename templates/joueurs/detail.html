@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block messages %}{% endblock %}
+{% block comment-jouer %}{% endblock %}
+{% block account %}{% endblock %}
+{% block formes %}{% endblock %}
+
+{# Une table pour présenter les données pour un joueur #}
+{% block index-detail %}
+<div class="div-index-detail">
+    <table class="joueur-detail">
+        <thead>
+            <caption>
+                <p>{{ joueur }} participe à ces redicos<p>
+                <h6>Dernière connexion {{ joueur.last_login|date:"Y/m/d" }}</h6>
+                <tr>
+                    <th>Est auteur de... </th>
+                    <th>Participe à..</th>
+                </tr>
+            </caption>
+        </thead>
+{#        <tbody>#}
+            <tr>
+                <td>
+                {# COLONNE IL EST AUTEUR DE...  #}
+                    {% for r in joueur.redsAuteurList %}
+                        <a href="/redico/{{ r.RedId }}/">&#8226; {{ r.RedTitre  }}</a><br />
+                    {%  endfor %}
+                </td>
+                {# COLONNE IL PARTICIPE À... #}
+                <td>
+                    {% for r in joueur.redsParticipantsList  %}
+                        <a href="/redico/{{ r.RedId }}/">&#8226; {{ r.RedTitre}}</a><br />
+                    {%  endfor %}
+                 </td>
+            </tr>
+{#        </tbody>#}
+    </table>
+</div>
+{% endblock index-detail %}

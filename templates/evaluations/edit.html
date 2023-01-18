@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load evaluations_tags %}
+
+{# comment #}
+prop
+red
+joueur
+evals
+{# endcomment #}
+{% block formes %}
+    <div class="div-formes">
+   <table class="tbl-ajout-edit-supprime-eval">
+       <tr><td>Redico</td><td>{{ red.titre }}</td></tr>
+	{% if prop.preambule %}
+	   <tr><td>Préambule</td><td> {{ prop.preambule}}</td></tr>
+	{% endif %}
+ 	<tr><td>Proposition</td><td>{{ prop.texte }} [{{ prop.auteur }}]</td></tr>
+    <tr><td>Evaluation actuelle</td><td> <strong>{{ eval.eval }}</strong></td></tr>
+    <tr><td>Nombre de modifications</td><td> {{ eval.nb_edit }}</td></tr>
+    </table>
+    <center>
+    <form method="POST" action=".">{% csrf_token %}
+        {{ form.as_p}}
+    <input type="submit" value="Enregistrer" />
+    </form>
+    </center>
+    </div>
+{% endblock formes %}
+
+

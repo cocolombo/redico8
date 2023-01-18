@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block footer %}{% endblock %}
+{% block colonne-gauche %}{% endblock %}
+{% block tables-index %}{% endblock %}
+{% block comment-jouer %}{% endblock %}
+{% block formes %}{% endblock %}
+
+{% block formes %}
+
+        <h2 class="text-center">S'enregistrer register.html</h2>
+        <form method="POST" action="{% url 'register' %}">
+           {% csrf_token %}
+                {% if form.errors %}
+                    <div class="alert alert-warning alert-dismissable" role="alert">
+                        <button class="close" data-dismiss="alert"><small><sup>x</sup></small></button>
+                        <p>Vous avez fait une erreur</p>
+                        {% for field in form %}
+                            {% if field.errors  %}
+                                {{ field.errors }}
+                            {% endif %}
+                        {% endfor %}
+                     </div>
+                 {% endif %}
+                 <table>{{ form.as_table }}</table>123
+                <div class="div-wrapper">
+                    <button class="btn" type="submit" >S'enregistrer</button>
+                     <a href="{% url 'redicos-index' %}"> <button class="btn" type="button" >Annuler</button></a>
+                </div>
+        </form>
+{% endblock formes %}

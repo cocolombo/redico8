@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="c43000c6-daa5-4a17-b8bc-c72e5780e23a" name="nimzo@ssh-nimzo.alwaysdata.net:22">
+        <fileTransfer rootFolder="/home/nimzo" accessType="SFTP" host="ssh-nimzo.alwaysdata.net" port="22" sshConfigId="c0858389-63f4-4554-ae7b-32d4a619808a" sshConfig="nimzo@ssh-nimzo.alwaysdata.net:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load evaluations_tags %}
+{% load i18n %}
+
+{#{% block messages %}{% endblock %}#}
+{% block comment-jouer %}{% endblock %}
+{% block formes %}{% endblock %}
+{% block account %}{% endblock %}
+
+
+{% block index-detail %}
+    <div class="div-index-detail">
+        <table class="redico-index">
+            <thead>
+                <caption>
+{#                <div class="bouton-en-tete">#}
+                    <div class="div-wrapper">
+                        {% if user.is_authenticated %}
+                            {% peut_voir_son_profil %}
+                        {% endif %}
+                            {% peut_demarrer_redico %}
+                    </div>
+{#                </div>#}
+                </caption>
+                <th>Actions</th>
+                <th>Titre</th>
+                <th>Nb props</th>
+                <th>Auteur</th>
+                <th>Les joueurs</th>
+            </thead>
+
+    <tbody>
+
+
+        {% for red in reds %}
+        <tr>
+            <td class="editerYN">
+{#                Note that when you’re using takes_context=True, there’s no need to pass #}
+{#                arguments to the template tag. It automatically gets access to the context.#}
+
+                {# ACTIONS  #}
+                <div>
+                        {% detail_du_redico %}
+                        {% peut_editer_titre_redico  %}
+                        {% peut_supprimer_redico %}
+                 </div>
+            </td>
+
+
+            <td>
+                {# TITRE #}
+                <a href="{% url 'redico-detail' red.id  %}"> {{ red.titre|urlize|truncatechars:35 }} </a>
+
+                {# NBPROPS #}
+                <td>{{ red.nb_props }}</td>
+
+                {# CRÉATEUR #}
+                <td>{{ red.createur|truncatechars:7 }}</td>
+
+                {# LES PARTICIPANTS #}
+                <td>
+                    {% with infos=red.participants_noms_ids %}
+                        {% if infos %}
+                            <table class="lesjoueursdansindex">
+                                {% for info in infos %}
+                                    <tr>
+                                        <td><a href="/joueur/{{ info.id_}}/"> {{ info.nom_|truncatechars:10  }}  </a></td>
+                                    </tr>
+                                {% endfor %}
+                             </table>
+                        {% else %}
+                            -
+                        {% endif %}
+                    {% endwith %}
+                </td>
+{#            </td> #}
+        </tr>
+
+        {% endfor %}
+
+
+    </tbody>
+</table>
+</div>
+{% endblock index-detail %}

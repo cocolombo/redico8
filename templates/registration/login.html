@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block comment-jouer %}{% endblock %}
+{% block colonne-gauche %}{% endblock %}
+{#{% block messages %}{% endblock %}#}
+
+{% block formes %}
+    <div class="div-formes">
+        <div class="div-header">
+            Se loguer <br> (si vous n'avez pas de compte vous devez vous <a href="{% url 'register' %}"> enregistrer)</a>
+        </div>
+
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+                {{ form.as_table }}
+
+        <div class="div-wrapper">
+            <button type="submit" class="form-button btn" formnovalidate >Confirmer</button>
+            <a href="{% url 'redicos-index' %}"> <button class="btn" type="button" >Annuler</button></a>
+        </div>
+        <p><a href="{% url "mdp_oublie" %}">Mot de passe oublié ?</a></p>
+        </form>
+    </div> {# div-formes #}
+{% endblock formes %}

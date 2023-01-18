@@ -1,0 +1,37 @@
+{# propositions/ajout.html#}
+{% extends "base.html" %}
+{% load evaluations_tags %}
+
+{% block action-redico %}{% endblock %}
+{% block action-proposition %}{% endblock %}
+{% block messages %}{% endblock %}
+{% block comment-jouer %}{% endblock %}
+{% block colonne-gauche %}{% endblock %}
+{% block index-detail %}{% endblock %}
+
+
+{% block formes %}
+   <div class="div-formes">
+        <div class="div-header">
+            Ajout d'une proposition au redico : <p></p>
+
+            <b>{{ red.titre }}</b><p></p>
+
+            Nous vous suggérons d'évaluer toutes les propositions en suspends avant d'en faire une nouvelle.
+            Le champ texte est obligatoire les autres sont facultatifs<br />
+        </div>
+
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table}}
+            </table>
+
+            <div class="div-wrapper">
+                <button type="submit" class="form-button btn">Sauvegarde</button>
+                <a href="{% url 'redicos-index' %}"> <button class="btn" type="button" >Annuler</button></a>
+            </div>
+        </form>
+   </div>
+{% endblock formes %}

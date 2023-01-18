@@ -1,0 +1,12 @@
+{# Appelé par: redico3.stats.views.showstat s#}
+
+
+{% block stats %}
+    {% if show_stats %}
+    <div class="div-stats">
+            {% autoescape off %}
+                {{ stats }}
+            {% endautoescape  %}
+    </div>
+    {% endif %}
+{% endblock stats %}

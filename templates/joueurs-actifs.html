@@ -1,0 +1,15 @@
+{% block joueurs-actifs %}
+    <div class="div-joueurs-actifs">
+        <table width="80%">
+            <caption>Joueurs actifs<p></p></caption>
+                <tbody>
+                    {% for j in joueurs_actifs %}
+                        <tr>
+                            <td><a href="/joueur/{{ j.joueur__id }}/"> {{ j.joueur__username|truncatechars:12 }}
+                            <td><a href="/joueur/{{ j.joueur__id }}/">{{ j.cnt }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+    </div>
+{% endblock joueurs-actifs %}

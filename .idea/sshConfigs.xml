@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="ssh-nimzo.alwaysdata.net" id="c0858389-63f4-4554-ae7b-32d4a619808a" port="22" nameFormat="DESCRIPTIVE" username="nimzo" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>

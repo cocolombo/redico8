@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load evaluations_tags %}
+
+{% block comment-jouer %}{% endblock %}
+{% block account %}{% endblock %}
+{% block formes %}{% endblock %}
+{% block changer-mdp %}{% endblock %}
+{% block les-codes %}{% endblock %}
+{% block messages %}{% endblock %}
+
+{% block index-detail %}
+    <div class="div-index-detail">
+        <table class="joueurs-index">
+            <thead>
+                <tr>
+                <th>Actions</th>
+                <th>Joueur</th>
+                <th>Depuis</th>
+                <th>Auteur de... </th>
+                <th>Participant à..</th></tr>
+            </thead>
+            <tbody>
+                {% for joueur in joueurs %}
+                    {# Colonne joueurs #}
+                    {# Lister les joueurs #}
+                     <tr>
+                     <div>
+                       <td class="actions">
+                        {% peut_voir_un_profil %}
+                       </td>
+                     </div>
+
+                    <div>{#  COLONNE NOM DU JOUEUR #}
+                        <td><a href="/joueur/{{ joueur.id }}/"  title={{ joueur }}>{{ joueur|truncatechars:8 }}</a>
+                        {# Colonne créateur de...#}
+                        </td>
+                     </div>
+                     {#  COLONNE DEPUIS #}
+                        <td>
+                           {{ joueur.date_joined|date:"Y/m/d" }}
+                        </td>
+                        {#  COLONNE AUTEUR DE.. #}
+                        {# lister les rédicos que je joueur a démaré #}
+                        <td>
+                            {% for r in joueur.redsAuteurList %}
+                              <a href="/redico/{{ r.RedId }}/">
+                                  &#8226; {{ r.RedTitre  }}</a><br />
+                            {%  endfor %}
+                        </td>
+                         {#  COLONNE PARTICIPE À.. #}
+                         {# lister les rédicos auxquels ce joueur a participe #}
+                        <td>
+                            {% for r in joueur.redsParticipantsList  %}
+                                <a href="/redico/{{ r.RedId }}/">
+                                &#8226;  {{ r.RedTitre}}</a><br />
+                            {%  endfor %}
+                        </td>
+                     </tr>
+                 {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock index-detail %}

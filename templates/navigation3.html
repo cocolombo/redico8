@@ -1,0 +1,30 @@
+{#{% block navigation %}#}
+
+{#<table class="navigation">#}
+    <ul class="div-navigation-list">
+      <li class="div-navigation-item">
+        <a href="/joueurs" class="div-navigation-link">Joueurs</a>
+      </li>
+      <li class="div-navigation-item">
+        <a href="/redicos" class="div-navigation-link">Redicos</a>
+      </li>
+      {% if user.is_authenticated %}
+          <li class="div-navigation-item">
+            <a href="{% url 'logout' %}" class="div-navigation-link">Se déloguer</a>
+          </li>
+{#        <td><a class="nav-link" href="{% url 'changer-mdp' %}">Changer mot de passe</a></td>#}
+{#        {% if user.is_auteur_du_redico %}#}
+{#            <td><a href="/redicos/supprime/">Suprimer</a></td>#}
+{#        {% endif %}#}
+       {% else %}
+            <li class="div-navigation-item">
+                <a href="{% url 'login' %}" class="div-navigation-link">  Se loguer</a>
+            </li>
+            <li class="div-navigation-item">
+                <a href="{% url 'register' %}" class="div-navigation-link"> Senregistrer</a>
+            </li>
+        {% endif %}
+            <li class="div-navigation-item">
+            <a href="/comment_jouer/" class="div-navigation-link">Comment jouer</a>
+            </li>
+    </ul>{#{% endblock %}#}

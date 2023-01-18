@@ -1,0 +1,179 @@
+
+settings.py
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp-redico.alwaysdata.net'
+EMAIL_HOST_USER = 'redico@alwaysdata.net'
+EMAIL_HOST_PASSWORD = 'r1e4d1i5c9o'
+EMAIL_PORT = 587
+
+
+
+blog/tokens.py
+
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils import six
+class TokenGenerator(PasswordResetTokenGenerator):
+    def _make_hash_value(self, user, timestamp):
+        return (
+            six.text_type(user.pk) + six.text_type(timestamp) +
+            six.text_type(user.is_active)
+        )
+account_activation_token = TokenGenerator()
+
+
+blog/forms.py
+
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+class SignupForm(UserCreationForm):
+    email = forms.EmailField(max_length=200, help_text='Required')    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
+
+
+
+blog/views.py
+
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate
+from .forms import SignupForm
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from .tokens import account_activation_token
+from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
+def signup(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            current_site = get_current_site(request)
+            mail_subject = 'Activate your blog account.'
+            message = render_to_string('acc_active_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+                'token':account_activation_token.make_token(user),
+            })
+            to_email = form.cleaned_data.get('email')
+            email = EmailMessage(
+                        mail_subject, message, to=[to_email]
+            )
+            email.send()
+            return HttpResponse('Please confirm your email address to complete the registration')
+    else:
+        form = SignupForm()
+    return render(request, 'signup.html', {'form': form})
+
+Update: For newer version of django add decode() when generate uid
+'uid':urlsafe_base64_encode(force_bytes(user.pk)).decode()
+
+
+
+blog/templates/acc_active_email.html:
+
+{% autoescape off %}
+Hi {{ user.username }},
+Please click on the link to confirm your registration,http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}
+
+
+
+blog/views.py
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+        # return redirect('home')
+        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+    else:
+        return HttpResponse('Activation link is invalid!')
+        
+        
+blog/urls
+
+from django.conf.urls import url
+from . import viewsurlpatterns = [
+    url(r'^$', views.home, name='home'),
+    url(r'^signup/$', views.signup, name='signup'),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        views.activate, name='activate'),
+]        
+        
+        
+        
+ blog/templates/signup.html
+
+{% block content %}
+  <h2>Sign up</h2>
+  <form method="post">
+    {% csrf_token %}
+      {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="display: none">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+      {% endfor %}    <button type="submit">Sign up</button>
+  </form>
+{% endblock %}
+
+
+https://medium.com/@frfahim/django-registration-with-confirmation-email-bb5da011e4ef
+
+
+def activate(request, uidb64, token):
+    ...
+
+    context = {'uidb64':uidb64, 'token':token}
+    return render(request, 'account/account_activation_email.html', context)
+
+
+path('activate/<slug:uidb64>/<slug:token>/',
+         views.activate_account, name='activate')
+
+
+       
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
