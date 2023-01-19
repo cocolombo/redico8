@@ -56,3 +56,105 @@ INFO:root:STATIC_URLS:      /static/
 INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
 INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
 INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/nimzo/ProjetsPython/redico8/joueurs/models.py changed, reloading.
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/nimzo/ProjetsPython/redico8/joueurs/models.py changed, reloading.
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/nimzo/ProjetsPython/redico8/joueurs/models.py changed, reloading.
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/nimzo/ProjetsPython/redico8/joueurs/models.py changed, reloading.
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/nimzo/ProjetsPython/redico8/joueurs/models.py changed, reloading.
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/nimzo/ProjetsPython/redico8/joueurs/models.py changed, reloading.
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/nimzo/ProjetsPython/redico8/joueurs/models.py changed, reloading.
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/nimzo/ProjetsPython/redico8/joueurs/models.py changed, reloading.
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:django.utils.autoreload:/home/nimzo/ProjetsPython/redico8/redico8/settings.py changed, reloading.
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.security.SuspiciousSession:Session data corrupted
+WARNING:django.security.SuspiciousSession:Session data corrupted
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.security.SuspiciousSession:Session data corrupted
+WARNING:django.security.SuspiciousSession:Session data corrupted
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:root:BASE_DIR:         /home/nimzo/ProjetsPython/redico8
+INFO:root:STATIC_ROOT:      /home/nimzo/ProjetsPython/redico8/project_static/collect
+INFO:root:STATIC_URLS:      /static/
+INFO:root:TEMPLATES[DIRS]   ['/home/nimzo/ProjetsPython/redico8/templates']
+INFO:root:STATICFILES_DIRS: ('/home/nimzo/ProjetsPython/redico8/css',)
+INFO:django.utils.autoreload:Watching for file changes with StatReloader
+WARNING:django.security.SuspiciousSession:Session data corrupted
+WARNING:django.security.SuspiciousSession:Session data corrupted

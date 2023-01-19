@@ -16,8 +16,9 @@ class Joueur(User):
     class Meta:
         proxy = True
         ordering = ('-id', )
-    def __str__(self):
-        return u"%s" % (self.username)
+    def __str__(self) -> str:
+        return f"{self.username}"
+
     def redsAuteurList(self):
         from redicos.models import Redico
         return Redico.objects.filter(createur=self.id).\
@@ -46,8 +47,16 @@ class Joueur(User):
         from evaluations.models import Evaluation
         return Evaluation.objects.filter(joueur_id=self.id).values('proposition__redico__id',
                                                            'proposition__redico__titre').distinct().count()-1
-    def username(self):
-        return u"%s" % (self.username)
+    def get_username(self) -> str:
+        return f"{self.username}"
 
-
+    def get_absolute_url(self) -> str:
+        """
+        Used to define the URL for an object. It is often used for the detail view of an object
+        Returns a string that represents the URL for the object, and it's often used by the
+        Django's reverse function to automatically generate URLs for the object.
+        You might define a get_absolute_url method on a Book model that returns
+        the URL for the detail view of a book, such as "/books/1/".
+        """
+        return f"/joueur/{self.id}" # "/joueur/%i/" % self.id
 
