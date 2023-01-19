@@ -1,0 +1,32 @@
+
+{% block col-gauche %}
+{#    <div class="div-dern-props">#}
+        <table  class="table caption-top  table-striped table-bordered">
+            <caption>Dernières propositions</caption>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Proposition</th>
+                    </tr>
+                </thead>
+            <tbody>
+                 {% for p in dern_props %}
+                  <tr>
+                        <td>
+{#                            <a href="/joueur/{{ p.auteur__id }}/"> {{ p.auteur__username|truncatechars:12 }}#}
+                            <a href="/joueur/{{ p.auteur__id }}">
+                                             {{ p.auteur__username|slice:":12"}}</a>
+                        </td>
+{#                        <td>#}
+{#                            <a href="/redico/{{ p.redico__id }}#{{ p.sequence }}">[{{ p.auteur__username|slice:":12"}}] &emsp;</a></td>#}
+                            <td><a href="/redico/{{ p.redico__id }}#{{ p.sequence }}">
+                                                 {{ p.texte|truncatewords:10|safe|urlize}}</a></td>
+
+
+
+                  </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{#    </div>#}
+{% endblock col-gauche %}

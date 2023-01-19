@@ -1,29 +1,21 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load widget_tweaks %}
 
-{% block actions %}{% endblock %}
-{% block messages %}{% endblock %}
-{% block comment-jouer %}{% endblock %}
-{% block colonne-gauche %}{% endblock %}
-{% block index-detail %}{% endblock %}s
+{% block col-gauche %} {% endblock %}
+{#{% block  message %}{% endblock %}#}
+{#{% block  ligne-actions%}{% endblock %}#}
 
-{% block account %}{% endblock %}
 
-{# REDICO AJOUT #}
-
-{% block formes %}
-    <div class="div-formes">
-        <div class="div-header">
-            {{ user }} entrez le titre de votre Redico
+{% block centre %}
+{#<div class="alert alert-primary col-sm-"5 >#}
+    <form method="POST" action="">
+        {% csrf_token %}
+{#        {{ form.as_table }}#}
+          {% render_field form.titre  rows="3" placeholder="Entrez le titre du Redico" %} <p></p>
+        <div class="div-wrapper">
+            <button type="submit" class="btn btn-primary btn-action  ">Confirmer</button>
+            <a href="{% url 'redicos-index' %}" class="btn btn-primary btn-action">Annuler</a>
         </div>
-
-        <form method="POST" action="">
-            {% csrf_token %}
-            {{ form.as_table }}
-x
-            <div class="div-wrapper">
-                <button type="submit" class="form-button btn">Ajout</button>
-                <a href="{% url 'redicos-index' %}"> <button class="btn" type="button" >Annuler</button></a>
-            </div>
-        </form>
-    </div> {# div-formes #}
-{% endblock formes %}
+    </form>
+{#</div>#}
+{% endblock centre %}

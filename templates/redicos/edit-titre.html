@@ -1,0 +1,24 @@
+{# redico/edit.html#}
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{#{% load evaluations_tags %}#}
+{##}
+{#{% block comment-jouer %}{% endblock %}#}
+{#{% block colonne-gauche %}{% endblock %}#}
+{#{% block messages %}{% endblock %}#}
+
+{% block centre %}
+        <h6 class="text-center ">
+            {{ user }}  puisque personne n'a encore fait de proposition pour ce <p>
+            redico vous pouvez éditer le titre de votre Redico </h6>
+
+        <form method="POST">
+            {% csrf_token %}
+{#            {{ form.as_table }}#}
+            {% render_field form.titre  rows="3" %} <p></p>
+            <div class="div-wrapper">
+                <button type="submit" class="btn btn-primary btn-action  ">Confirmer</button>
+                <a href="{% url 'redicos-index' %}" class="btn btn-primary btn-action ">Annuler</a>
+            </div>
+        </form>
+{% endblock centre %}

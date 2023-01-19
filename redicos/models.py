@@ -9,7 +9,7 @@ from evaluations.models import Evaluation
 from django.db.models import Q  # Count
 import itertools
 import pandas as pd
-from joueurs.models import Joueur
+# from joueurs.models import Joueur
 from propositions.models import Proposition
 from joueurs.models import Joueur
 from itertools import chain

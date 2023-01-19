@@ -1,64 +1,53 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load evaluations_tags %}
+{% load gb_filters %}
 
-{% block comment-jouer %}{% endblock %}
-{% block account %}{% endblock %}
-{% block formes %}{% endblock %}
-{% block changer-mdp %}{% endblock %}
-{% block les-codes %}{% endblock %}
-{% block messages %}{% endblock %}
+{#    <div id="tbljoueursindex">#}
+{% block ligne-actions %}
 
-{% block index-detail %}
-    <div class="div-index-detail">
-        <table class="joueurs-index">
-            <thead>
-                <tr>
-                <th>Actions</th>
+
+{% endblock ligne-actions %}
+
+{% block centre %}
+    <table class="table table-striped table-bordered table-hover table-warning border-primary caption-top">
+        <caption>Liste des joueurs (joueurs/index.html) </caption>
+        <thead>
+            <tr>
                 <th>Joueur</th>
-                <th>Depuis1</th>
+                <th>Depuis</th>
                 <th>Auteur de... </th>
-                <th>Participant à..</th></tr>
-            </thead>
-            <tbody>
-                {% for joueur in joueurs %}
-                    {# Colonne joueurs #}
-                    {# Lister les joueurs #}
-                     <tr>
-                     <div>
-                       <td class="actions">
-                        {% peut_voir_un_profil %}
-                       </td>
-                     </div>
+                <th>Participe à... </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for joueur in joueurs %} {# Pour tous les joueurs #}
+                {# Colonne joueurs #} {# Lister les joueurs #}
+                <tr> {# Début de la ligne ACTIONS-JOUEUR=DEPUIE-AUTEUR DE...-PARTICIPE À... #}
+                    <td> {# CELL JOUEUR (son nm  #}
+                        <div>
+                             <a href="/joueur/{{ joueur.id }}"  title={{ joueur }}>{{ joueur.username|truncatechars:15 }}</a>
+                        </div>
+                    </td>
 
-                    <div>{#  COLONNE NOM DU JOUEUR #}
-                        <td><a href="/joueur/{{ joueur.id }}/"  title={{ joueur }}>{{ joueur|truncatechars:8 }}</a>
-                        {# Colonne créateur de...#}
-                        </td>
-                     </div>
-                     {#  COLONNE DEPUIS #}
-                        <td>
-                           {{ joueur.date_joined|date:"Y/m/d" }}
-                        </td>
-                        {#  COLONNE AUTEUR DE.. #}
-                        {# lister les rédicos que je joueur a démaré #}
-                        <td>
-                            {% for r in joueur.redsAuteurList %}
-                              <a href="/redico/{{ r.RedId }}/">
-                                  &#8226; {{ r.RedTitre  }}</a><br />
-                            {%  endfor %}
-                        </td>
-                         {#  COLONNE PARTICIPE À.. #}
-                         {# lister les rédicos auxquels ce joueur a participe #}
-                        <td>
-                            {% for r in joueur.redsParticipantsList  %}
-                                <a href="/redico/{{ r.RedId }}/">
-                                &#8226;  {{ r.RedTitre}}</a><br />
-                            {%  endfor %}
-                        </td>
-                     </tr>
-                 {% endfor %}
-            </tbody>
-        </table>
-    </div>
-{% endblock index-detail %}
+                    <td> {# COLONNE DEPUIS #}
+                       {{ joueur.date_joined|date:"Y/m/d" }}
+                    </td>
+
+                    {# Voir: https://stackoverflow.com/questions/50703556/get-dictionary-value-by-key-in-django-template #}
+                    <td> {# COLONNE AUTEUR DE,,,  (liste des rédicos que je joueur a démaré) #}
+                        {% for r in joueur.AuteurDeCesRedicos %}
+                            <a href="/redico/{{ r.id }}/"> &#8226; {{ r.titre }}</a><br />
+                        {%  endfor %}
+                    </td>
+
+                    <td> {# COLONNE PARTICIPE À...  (liste fes rédicos auxquels ce joueur a participe) #}
+                        {% for r in joueur.ParticipeACesRedicos  %}
+                            <a href="/redico/{{ r.id }}/"> &#8226;  {{ r.titre }}</a><br />
+                        {%  endfor %}
+                    </td>
+                 </tr> {# Fin des lignes JOUEUR=DEPUIS-AUTEUR DE...-PARTICIPE À... #}
+             {% endfor %} {# for joueur in joueurs #}
+        </tbody>
+    </table>
+{% endblock centre %}

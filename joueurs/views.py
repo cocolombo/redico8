@@ -1,82 +1,77 @@
 from django.shortcuts import render
 
 # Create your views here.
-# -*- coding: latin-1 -*-
-# joueurs/views.py
-# VIEWS
-# from django.http import Http404
-# from redicos.models import Redico
-# from evaluations.models import Evaluation
-from django.shortcuts import render
+from django.views.generic import DeleteView, UpdateView, CreateView, DetailView, ListView
 from joueurs.models import Joueur
+from django.contrib.auth.models import User
+from django.db.models import Q #, F
 
-def index(request):
-    # joueurs = Joueur.objects.all().order_by('-id')
-    # Que les joueurs actifs (avec au moins une evaluation
-    # joueurs = Evaluation.objects.values_list('joueur__id').distinct()
-    # joueurs = Joueur.objects.values('evaluation__joueur__id').distinct()
-    joueurs = Joueur.objects.exclude(evaluation__joueur__id=None).distinct()
-    joueurs = joueurs.order_by('-date_joined')
-    c = {'request':request,
-         'joueurs':joueurs,
-         'show_profil'     : True,
-         'show_add_redico' : True,
-         'show_add_prop'   : False,
-         'show_add_eval'   : False,
-         'show_edit_redico': False,
-         'show_edit_prop'  : False,
-         'show_edit_eval'  : False
-         }
-    return render(request,  "joueurs/index.html",c)
-# https://stackoverflow.com/questions/52644035/how-to-show-a-pandas-dataframe-into-a-existing-flask-html-table
-# def index_df(request):
-#     joueurs = Joueur.objects.exclude(evaluation__joueur__id=None).distinct()
-#     joueurs = joueurs.order_by('username')
-#     print(joueurs)
-#     joueurs_df = joueurs.values_list('id','username')
-#     joueurs_df = list(joueurs_df)
-#     df = pd.DataFrame(joueurs_df, columns=['id', 'username']).to_html
-#     c = {'request':request,
-#          'df': df}
-#     return render(request,  "joueurs/index_df.html", c)
-def detail(request, joueur_id):
-    joueur = Joueur.objects.get(id=joueur_id)
-    # redAuteur = Redico.objects.filter(createur=lejoueur)
-    # redParticipants = Evaluation.objects.filter(joueur=joueur_id).values('proposition__redico__id', 'proposition__redico__titre').distinct()
-    # c = {'request':request,
-    #      'joueur':joueur,}
+class JoueurDetailsView(DetailView):
+    """
+    Détails des activités d'un joueur
+    """
+    model = Joueur
+    template_name = 'joueurs/details.html'
 
-    c = { 'joueur': joueur,
-          'show_profil'         : True,
-          'show_action_redico'  : True,
-          'show_action_prop'    : False }
-
-    # 'redAuteur':redAuteur }
-    # 'redParticipants':redParticipants, }
-    # return HttpResponse(t.render(c))
-    return render(request, "joueurs/detail.html", c)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        joueur = self.object
+        context["joueur"] = joueur
+        return context
 
 
-# from django.contrib.auth.models import User
-import pandas as pd
-# def index(request):
-#     # joueurs = Joueur.objects.all().order_by('-id')
-#     # Que les joueurs actifs (avec au moins une evaluation
-#     # joueurs = Evaluation.objects.values_list('joueur__id').distinct()
-#     # joueurs = Joueur.objects.values('evaluation__joueur__id').distinct()
-#     lst = []
-#     joueurs = Joueur.objects.exclude(evaluation__joueur__id=None).distinct()
-#     joueurs = joueurs.order_by('username')
-#     for j in joueurs:
-#         lst.append(list(j.redsParticipantsList().values_list('proposition__redico__id', flat=True)))
-#     info = zip(joueurs, lst)
-#     df = pd.DataFrame(info)
-#     df.at[:, 'B'] = lst
-#     print(df)
-#     c = {'request':request,
-#          'df':df.to_html()}
-#     # c = {'request':request,
-#     #      'joueurs':joueurs}
-#     return render(request,  "joueurs/index_df.html",c)
+class JoueursIndexView(ListView):
+    """
+    Liste des joueurs inscrit dans le site
+    """
+    model = Joueur
+    template_name = 'joueurs/index.html'
+    ordering = '-pk'
 
-# /home/nimzo/PycharmProjects/redico/redico/templates/joueurs/index.htmlhere.
+    def get_queryset(self):
+        qs = Joueur.objects.all()
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        joueurs = context['object_list']
+        context["joueurs"] = joueurs
+        return context
+
+
+"""
+class DetailsJoueurView(DetailView):
+    model = Joueur
+    template_name = 'joueurs/joueur-details.html'
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['joueur'] = self.object
+        return context
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
+        
+class IndexJoueursView(ListView):
+    model = Joueur
+    template_name = 'joueurs/joueurs-index.html'
+
+    def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            joueurs = self.object_list  #Joueur.objects.filter(actif=True).order_by('-id')
+            context['joueurs'] = joueurs
+            # print(context['joueurs'])
+            return context
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset()
+        qs = qs.filter(is_active=True).order_by('-id')
+        # Enlever admin de la liste des joueurs affichée
+        qs = qs.filter(~Q(username='admin'))
+        # print(qs)
+        return qs               # self.object_lidt = q
+
+       	
+"""

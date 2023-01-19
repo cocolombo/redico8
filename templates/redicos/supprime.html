@@ -1,26 +1,19 @@
 {% extends 'base.html' %}
 
-{% block comment-jouer %}{% endblock %}
-{% block colonne-gauche %}{% endblock %}
-{% block account %}{% endblock %}
-{% block index-detail %}{% endblock %}
-{% block action %}{% endblock %}
-{% block messages %}{% endblock %}
-{% block footer %}{% endblock %}
-
-{% block formes %}
-   <div class="div-formes">
-        <h2 class="text-center">Vous êtes l'auteur de ce Redico intitulé: intitulé:  <p></p>
-                                "{{ titre|slice:':25'}}..." <p></p>
-                                et personne n'a encore fait de proposition. <p></p>
-                                Voulez-vous le supprimer ?"</h2>
-
-                <form action='.' method='POST'>{% csrf_token %}
-
-                <div class="div-wrapper">
-                    <button type="submit" class="form-button btn">Sauvegarde1</button>
-                    <a href="{% url 'redicos-index' %}"> <button class="btn" type="button" >Annuler</button></a>
-                </div>
-    </form>
-   </div>
-{% endblock ajout-edit-supprime-eval %}
+{% block col-gauche %}{% endblock %}
+{% block centre %}
+{#   <div class="div-formes">#}
+        <h6 class="text-center">Vous êtes l'auteur de ce Redico intitulé: intitulé:  <br>
+                                "{{ redico.titre|slice:':25'}}..." <br>
+                                et personne n'a encore fait de proposition. <br>
+                                Voulez-vous le supprimer ?"</h6>
+        <form action='redicos' method='POST'>
+            {% csrf_token %}
+            <div class="div-wrapper">
+                <button type="submit" class="btn btn-primary btn-action  ">Confirmer</button>
+                <a href="{% url 'redicos-index' %}"
+                class="btn btn-primary btn-action">Annuler</a>
+            </div>
+        </form>
+{#   </div>#}
+{% endblock centre %}

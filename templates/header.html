@@ -1,0 +1,8 @@
+
+{% block header %}
+    {%  if user.is_authenticated %}
+        <div><h1>Le Redico <h6>({{ user }} est connecté}</h6></h1></div>
+    {% else %}
+        <div><h1>Le Redico <h6>(Vous n'êtes pas connecté}</h6></h1></div>
+    {% endif %}
+{% endblock %}

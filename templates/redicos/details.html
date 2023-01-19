@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% load evaluations_tags %}
+{% load gb_filters %}
+{% load i18n %}
+
+{{% comment %}
+    0- Template redico-details.html
+    1- Table avec caption listant les redicos dans la base de ddonnée
+    2- Colonnes`Actions-Titre-Nb pprops-Auteur-Les joueurs
+{% endcomment %}
+
+{% block centre %}
+{#    <table  id="tblredicodetails">#}
+    {# length of red.ses_props #}
+
+{#    {% if red.max_sequence == 0 %}#}
+{#        {% block message %}#}
+{#            Aucune proposition pour le redico: {{ red.titre }}#}
+{#        {% endblock message %}#}
+{#     {% else %}#}
+{#        <table class="table table-success table-striped table-bordered caption-top">#}
+         <div>
+                {# Liste des participants #}
+                Participants:
+                {% for info in  red.ses_participants %}
+                    <a href="{% url 'joueur-details' info.auteur__id %}">{{ info.auteur__username }}</a>
+                {% endfor %}
+                <p></p>
+                {% message_comment_participer red %}
+            {% if user.is_authenticated %}
+                <p>
+
+                {% ajouter_proposition  red %}
+                {% editer_titre_redico    red %}
+                {% supprimer_redico       red %}
+            {% endif %}
+
+        </div>
+        <table class="table table-striped table-bordered table-hover table-warning border-danger caption-top">
+
+           <caption>
+               (redicos/details.html)<p></p>
+               Redico: {{ red.titre }} [{{ red.auteur }}]<p></p>
+           </caption>
+
+
+        <thead>   {# LARGEUR DES COLONNES #}
+            <tr>
+                <th>Proposition</th>
+                <th>#</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {# TABLE DES PROPOSITIONS #}
+
+          {% for prop in red.ses_props %}
+                 <tr>    {# ROPOSITIONS-EVALUATIONS #}
+                     <td> {# COLONNE PROPOSITIfON #}
+                     {% comment %}
+                         Structure de la table (sur redico-details
+
+                         Auteur      | Etienne (3125)
+                         Praambule   | réf #117
+                         Texte       | La loi doit protéger les droits des enfants
+                         Lien        | tp://redico.alwaysdata.net/redico/25/
+
+                         Évaluations |
+                         Etienn      | <meter> 100.0 Totalement en accord 100 *
+                         Moyenne     | <meter>
+                     {% endcomment %}
+
+                 {# LES LIENS EN HAUT DE LA TABLE #}
+                 <ul>
+                    {% if user.is_authenticated %}
+                        {% editer_proposition     prop %}
+                        {% supprimer_proposition  prop %}
+                        {% evaluer_la_proposition prop %}
+
+                    {% endif %}
+                </ul>
+
+                {# /LES LIENS EN AHUT DE LA TABLE #}
+
+                    <table class="table table-striped table-bordered table-hover table-warning border-primary caption-top">
+                        {# LIGNE AUTEUR #}
+                        <tr>
+                            <th> Auteur </th>
+                            <td> {{ prop.auteur }} ({{ prop.id}})</td>
+                        </tr>
+                        {# /LIGNE AUTEUR #}
+
+                        {# LIGNE PRÉAMBULE #}
+                        {% if prop.preambule %}
+                            <tr>
+                                <th  style="width: 1% !important;">Préambule</th>
+                                <td> {{ prop.preambule|linebreaks|safe|urlize|truncatewords:50  }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {# /LIGNE PRÉAMBULE #}
+
+                        {# LIGNE TEXTE #}
+                        <tr>
+                            <th>Texte</th>
+                            <td>{{ prop.texte|linebreaks }}</td>
+                        </tr>
+                        {# /LIGNE TEXTE #}
+
+                        {# LIGNE LIEN #}
+                        {% if prop.lien %}
+                            <tr>
+                                <th>Lien</th>
+                                <td>{{ prop.lien|safe|urlizetrunc:40 }}</td>
+                            </tr>
+                        {% endif %}
+                        {# /LIGNE LIEN #}
+
+                        {# SECTION ÉVALUATION #}
+                        {% if prop.nb_evaluations > 0 %}
+                            {#  LIGNE ÉVALUATION #}
+                            <tr>
+                                <th>Évaluations</th>
+                            </tr>
+                            {# /LIGNE ÉVALUATION #}
+
+                            <tr>
+                           {% for e in prop.ses_evaluations %}
+                                <tr>
+                                    {# AUTEUR DE L'EVALUATION #}
+                                    <td >
+                                     {{ e.nom|slice:":10" }}
+
+                                    </td>
+                                <td>
+                                        {% if e.eval >= 0 %}    {# L'évaluation est > 0 #}
+                                            {{ e.eval|meter_val }}
+                                            {{ e.get_eval_str }}
+                                            {{ e.eval|floatformat:"-5"|abstention }}
+                                            <a title="{{ e.commentaire }}"
+                                               href="{% url "proposition-details" red.id prop.sequence %}"></a>
+
+                                            {% aveccommentaire e %}
+{#                                            {% if e.commentaire %}      {# Avec commentaire #}
+{#                                                <a title="{{ e.commentaire }}"#}
+{#                                                href="{% url "proposition-details" red.id prop.sequence %}">#}
+{#                                                <b><i>(*)</i></b></a>#}
+{#                                            {% else %}                  {# Sans commentaire #}
+{##}
+{#                                            {% endif %}#}
+                                         {% else %}             {# C'est une abstention #}
+                                                <b><i>{{ e.eval|floatformat:"-5"|abstention }}</i></b>
+                                            {% aveccommentaire e %}
+{#                                                {% if e.commentaire %}  {# Avec commentaire #}
+{#                                                   <a title="{{ e.commentaire }}"#}
+{#                                                    href="{% url "proposition-details" red.id prop.sequence %}">#}
+{#                                                    <b><i>(*)</i></b></a>#}
+{#                                                {% endif %}#}
+                                        {% endif %}
+                                {# Sur sa ligne d'évaluation afficher le bouton pour modifier son evaluation #}
+                                    {% modifier_son_eval  prop e %}
+                                    </td>
+                                </tr>
+                            {% endfor %}   {# for e in prop.ses_evaluations #}
+
+                        {# /SECTION ÉVALUATIONS #}
+
+                            <th>Moyenne</th>
+                            <td> {{ prop.moyenne_des_evals|meter_val }} </td>
+                        {% endif %}
+
+                </table> {# /Préambule-Texte-Lien-Auteur #}
+
+                </td> {# /COLONNE PROPOSITION #}
+
+                    {# COLONNE No #}
+
+{#                    <td id="colonnenumero"> {# COLONNE No #}
+                    <td> {# COLONNE No #}
+                        <a href="{% url 'proposition-details' red.id prop.sequence %}">{{ prop.sequence }}</a>
+                    </td>
+                    {# /COLONNE No #}
+
+                </tr>    {# /ACTIONS-NO-ÉVALUATIONS-PROPOSITIONS #}
+            {% endfor %}
+       </tbody>
+    </table> {# tblredicodetails #}
+{#    {% endif %}#}
+
+{% endblock centre %}
+

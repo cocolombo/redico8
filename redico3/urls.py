@@ -34,9 +34,9 @@ urlpatterns = [
     re_path('admin/',       admin.site.urls),
 
 
-    re_path('^$',       redicos_views.index),
-    re_path('index',        redicos_views.index,
-                            name='redicos-index'),
+    re_path('^$',           redicos_views.RedicosIndexView.as_view(), name='redicos-index'),
+    re_path('index',        redicos_views.RedicosIndexView.as_view(), name='redicos-index'),
+
     re_path(r'home',        TemplateView.as_view(template_name='home.html'),
                             name='home'),
 
@@ -102,33 +102,33 @@ urlpatterns = [
                             name='reinitialiser-mdp'),
 
     # http://127.0.0.1:8000/redico/11/statsdetail/
-    re_path(r'^redico/(?P<redico_id>\d+)/statsdetail/$',
-                            redicos_views.statsdetail,
-                            name='stats-detail'),
+    # re_path(r'^redico/(?P<redico_id>\d+)/statsdetail/$',
+    #                         redicos_views.statsdetail,
+    #                         name='stats-detail'),
 
     # REDICO INDEX
-    re_path(r'^redicos/$',  redicos_views.index,
+    re_path(r'^redicos/$',  redicos_views.RedicosIndexView.as_view(),
                             name='redicos-index'),
 
     # REDICO DETAIL
     # redico/111/
     re_path(r'^redico/(?P<redico_id>\d+)/$',
-                            redicos_views.detail,
-                            name='redico-detail'),
+                            redicos_views.RedicoDetailsView.as_view(),
+                            name='redico-details'),
     # REDICO AJOUT
     re_path(r'^redico/ajout/$',
-                            redicos_views.ajout,
+                            redicos_views.RedicoAjoutView.as_view(),
                             name='redico-ajout'),  # http://127.0.0.1:8000/redicos/ajout
     # http://127.0.0.1:8000/redico/11/edit/
 
     # REDICO SUPPRIME
     # re_path(r'^redico/efface/(?P<redico_id>\d+)/$', redicos_views.EffacerView.as_view(), name='redico-efface'),
     re_path(r'^redico/(?P<redico_id>\d+)/supprime/$',
-                            redicos_views.supprime,
+                            redicos_views.RedicoSupprimeView.as_view(),
                             name='redico-supprime'),
     # REDICO EDIT
     re_path(r'^redico/(?P<redico_id>\d+)/edit/$',
-                            redicos_views.edit,
+                            redicos_views.RedicoEditTitreView.as_view(),
                             name='redico-edit'),  # http://127.0.0.1:8000/redicos/edit/11
 
     # path('/efface/', CourseDeleteView.as_view(), name='courses-efface'),
@@ -159,11 +159,11 @@ urlpatterns = [
                             name='proposition-supprime'),
 
     # JOUEURS INDEX
-    re_path(r'^joueurs/$',  joueurs_views.index,
+    re_path(r'^joueurs/$',  joueurs_views.JoueursIndexView.as_view(),
                             name='joueurs-index'),
     # JOUEUR DETAIL
     re_path(r'^joueur/(?P<joueur_id>\d+)/$',
-                            joueurs_views.detail,
+                            joueurs_views.JoueurDetailsView.as_view(),
                             name='joueur-detail'),
 
     # http://127.0.0.1:8000/heatmap/11/proposition/1/

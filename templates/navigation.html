@@ -1,26 +1,16 @@
-{#{% block navigation %}#}
+{% load evaluations_tags %}
 
-<div class="div-navigation">
-    <table class="navigation">
-        <td><a href="/joueurs">Joueurs</a></td>
-        <td><a href="/redicos">Redicos</a></td>
-        {% if user.is_authenticated %}
-        <td><a href="{% url 'logout' %}">Se déloguer</a></td>
-        <td><a href="{% url 'changer-mdp' %}">Changer mot de passe</a></td>
+{% block navigation %}
+    <div class="container">
+        <ul class="nav  justify-content-center">
+                {% navjoueurs %}
+                {% navredicos %}
+                {% navdemarrerredico %}
+                {% navvotreprofil %}
 
-        {#        <td><a class="nav-link" href="{% url 'changer-mdp' %}">Changer mot de passe</a></td>#}
-        {#        {% if user.is_auteur_du_redico %}#}
-        {#            <td><a href="/redicos/supprime/">Suprimer</a></td>#}
-        {#        {% endif %}#}
-
-
-        {% else %}
-        <td><a href="{% url 'login' %}">Se loguer</a></td>
-{#        <td><a href="{% url 'mdp_oublie' %}">Oublié votre mdp ?</a></td>#}
-
-        <td><a href="{% url 'register' %}"> S'enregistrer</a></td>
-        {% endif %}
-        <td><a href="/comment_jouer/">Comment jouer</a></td>
-    </table>
-</div>
-{#{% endblock %}#}
+                {% navloguer %}
+                {% navdeloguer %}
+                {% navsenregistrer %}
+        </ul>
+    </div>
+{% endblock %}

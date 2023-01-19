@@ -1,0 +1,23 @@
+{% block col-gauche %}
+{#    <div class="redicos-actifs">#}
+{#        <div class="div-redicos-actifs">#}
+    <table class="table table-striped table-bordered caption-top">
+        <caption>Redicos les plus actifs<p></p></caption>
+        <thead>
+        <tr>
+            <th>Redico</th>
+            <th>Nb de propositions</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for r in redicos_dynamiques %}
+                <tr>
+                    <td><a href="/redico/{{ r.redico__id }}/"> {{ r.redico__titre|truncatechars:15 }}</a></td>
+                    <td>{{ r.cnt }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{#            </div>#}
+{#    </div>#}
+{% endblock col-gauche %}

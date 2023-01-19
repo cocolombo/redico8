@@ -1,0 +1,22 @@
+{% block col-gauche %}
+{#    <div class="div-joueurs-actifs">#}
+        <table class="table table-striped table-bordered caption-top">
+            <caption>Joueurs actifs<p></caption>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Nb de propositions</th>
+                </tr>
+            </thead>
+
+                <tbody>
+                    {% for j in joueurs_dynamiques %}
+                        <tr>
+                            <td><a href="/joueur/{{ j.auteur__id }}/"> {{ j.auteur__username|truncatechars:12 }}</td>
+                            <td>{{ j.cnt }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+{#    </div>#}
+{% endblock col-gauche %}
